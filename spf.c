@@ -86,7 +86,24 @@ spf_tracer_append_file(struct spf_tracer *tracer,
 static void
 spf_tracer_reset(struct spf_tracer *tracer)
 {
+    char path[512] = { 0 };
+    struct stat sb = {};
+
     RHO_TRACE_ENTER();
+
+    rho_path_join(SPF_TRACE_ROOTDIR, "instances/spf/events/kprobes/spf_eldu/enable",
+            path, sizeof(path));
+    if ((stat(path, &sb) == 0) && S_ISREG(sb.st_mode))
+        spf_tracer_write_file(tracer, "instances/spf/events/kprobes/spf_eldu/enable", "0");
+
+    rho_path_join(SPF_TRACE_ROOTDIR, "instances/spf/events/kprobes/spf_ewb/enable",
+            path, sizeof(path));
+    if ((stat(path, &sb) == 0) && S_ISREG(sb.st_mode))
+        spf_tracer_write_file(tracer, "instances/spf/events/kprobes/spf_ewb/enable", "0");
+
+    rho_path_join(SPF_TRACE_ROOTDIR, "instances/spf", path, sizeof(path));
+    if ((stat(path, &sb) == 0) && S_ISDIR(sb.st_mode))
+        rmdir("/sys/kernel/debug/tracing/instances/spf");
 
     spf_tracer_write_file(tracer, "current_tracer", "nop");
     spf_tracer_write_file(tracer, "tracing_on", "0");
@@ -251,13 +268,8 @@ spf_tracer_stop(struct spf_tracer *tracer)
 {
     RHO_TRACE_ENTER();
 
-    spf_tracer_write_file(tracer, "instances/spf/events/kprobes/spf_eldu/enable", "0");
-    spf_tracer_write_file(tracer, "instances/spf/events/kprobes/spf_ewb/enable", "0");
-
     close(tracer->fd);
     spf_tracer_reset(tracer);
-
-    rmdir("/sys/kernel/debug/tracing/instances/spf");
     
     RHO_TRACE_EXIT();
     return;
