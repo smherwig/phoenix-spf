@@ -4,16 +4,16 @@ Overview
 spf is SGX page fault measurement tool, and based on
 [sgx-perf](https://github.com/ibr-ds/sgx-perf).  The tool uses kprobes to
 record when the Intel SGX Linux kernel driver invokes the `sgx_eldu` and
-`sgx_ewb` functions, which invoke the SGX instructions `ELDU` and `EWB`,
-respectively.  `ELDU` loads  page from regular memory into enclave memory
-(EPC), whereas `EWB` pages out a page from the EPC to regular memory.
+`sgx_ewb` functions, which, in turn, invoke the SGX instructions `ELDU` and
+`EWB`, respectively.  The SGX instruction `ELDU` loads a page from regular
+memory into enclave memory (EPC), whereas `EWB` pages out a page from the EPC
+to regular memory.
 
 
 Building and Installing
 =======================
 
 spf depend on [librho](https://github.com/smherwig/librho).
-[librpc](https://github.com/smherwig/phoenix-librpc).
 I assume that librho is installed under `$HOME`; modify spf's
 Makefile if this is not the case.
 
