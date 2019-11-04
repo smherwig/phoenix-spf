@@ -10,8 +10,8 @@ memory into enclave memory (EPC), whereas `EWB` pages out a page from the EPC
 to regular memory.
 
 
-Building and Installing
-=======================
+<a name="building"/> Building and Installing
+============================================
 
 spf depend on [librho](https://github.com/smherwig/librho).
 I assume that librho is installed under `$HOME`; modify spf's
@@ -41,9 +41,9 @@ make install INSTALL_TOP=$HOME
 ```
 
 
-Running
-=======
+<a name="running"/> Running
+===========================
 
 ```
-./spf
+sudo ./spf
 ```
