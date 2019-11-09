@@ -13,9 +13,9 @@ to regular memory.
 <a name="building"/> Building and Installing
 ============================================
 
-spf depend on [librho](https://github.com/smherwig/librho).
-I assume that librho is installed under `$HOME`; modify spf's
-Makefile if this is not the case.
+spf depends on [librho](https://github.com/smherwig/librho).  I assume that
+librho is installed under `$HOME`; modify spf's Makefile if this is not the
+case.
 
 
 To download and build spf, enter:
@@ -46,4 +46,14 @@ make install INSTALL_TOP=$HOME
 
 ```
 sudo ./spf
+```
+
+To stop, hit `CTRL-C`.
+
+
+`spf` writes the events to stdout; example output lines are:
+
+```
+<...>-2105  [006] d...  6739.020106: spf_ewb: (sgx_ewb+0x0/0xd2 [isgx]) addr=0x5e8c000
+<...>-13563 [005] d...  6739.020221: spf_eldu: (sgx_eldu+0x0/0x35e [isgx]) addr=0x7ffa000
 ```
